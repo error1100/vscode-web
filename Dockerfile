@@ -24,15 +24,17 @@ RUN sudo chown -R coder:coder /home/coder/.local
 
 # Install a VS Code extension:
 # Note: we use a different marketplace than VS Code. See https://github.com/cdr/code-server/blob/main/docs/FAQ.md#differences-compared-to-vs-code
-RUN code-server --install-extension ms-dotnettools.csharp
+RUN code-server --install-extension muhammad-sammy.csharp
 RUN code-server --install-extension ms-vscode.powershell
 RUN code-server --install-extension scalameta.metals
+RUN code-server --install-extension ms-python.python
 
 # Install apt packages:
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb; sudo dpkg -i packages-microsoft-prod.deb; rm packages-microsoft-prod.deb
 RUN sudo apt-get update
-RUN sudo apt-get install -y default-jdk apt-transport-https dotnet-sdk-6.0
+RUN sudo apt-get install -y default-jdk apt-transport-https dotnet-sdk-6.0 python3.10
 RUN wget https://github.com/PowerShell/PowerShell/releases/download/v7.2.1/powershell-lts_7.2.1-1.deb_amd64.deb; sudo dpkg -i powershell-lts_7.2.1-1.deb_amd64.deb; rm powershell-lts_7.2.1-1.deb_amd64.deb
+RUN sudo apt-get clean
 
 # Copy files: 
 # COPY deploy-container/myTool /home/coder/myTool
